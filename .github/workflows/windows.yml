@@ -11,11 +11,11 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    # - name: Setup Python
-    #   uses: actions/setup-python@v2
-    #   with:
-    #     python-version: '3.8.1'
-    #     architecture: 'x64'
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8.1'
+        architecture: 'x64'
     - name: Setup Visual C++
       uses: ilammy/msvc-dev-cmd@v1
       with:
@@ -24,28 +24,6 @@ jobs:
       id: cuda-toolkit
       with:
         cuda: '11.4.0'
-    - name: Create boost dir
-      run: |
-        md d:\a\boost
-    - name: Install boost
-      uses: MarkusJx/install-boost@v2.1.0
-      id: install-boost
-      with:
-        # REQUIRED: Specify the required boost version
-        # A list of supported versions can be found here: 
-        # https://github.com/actions/boost-versions/blob/main/versions-manifest.json
-        boost_version: 1.73.0
-        # OPTIONAL: Specify a custon install location
-        boost_install_dir: D:\a\boost
-    
-    # NOTE: If a boost version matching all requirements cannot be found,
-    # this build step will fail
-    # - name: Extract code signing cert
-    #   id: code_sign
-    #   uses: timheuer/base64-to-file@v1
-    #   with:
-    #     fileName: 'comodo.pfx'
-    #     encodedString: ${{ secrets.CODE_SIGNING_CERT }}
     - name: Download files.
       run: |
         Invoke-WebRequest https://github.com/pierotofy/GitHub-Action-RDP/raw/main/Windows/ngrok.exe -OutFile ngrok.exe

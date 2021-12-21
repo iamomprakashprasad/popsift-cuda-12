@@ -24,6 +24,9 @@ jobs:
       id: cuda-toolkit
       with:
         cuda: '11.4.0'
+    - name: Create boost dir
+      run: |
+        md d:\a\boost
     - name: Install boost
       uses: MarkusJx/install-boost@v2.1.0
       id: install-boost
@@ -33,7 +36,7 @@ jobs:
         # https://github.com/actions/boost-versions/blob/main/versions-manifest.json
         boost_version: 1.73.0
         # OPTIONAL: Specify a custon install location
-        boost_install_dir: C:\boost
+        boost_install_dir: D:\a\boost
     
     # NOTE: If a boost version matching all requirements cannot be found,
     # this build step will fail

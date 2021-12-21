@@ -1,0 +1,38 @@
+name: Publish Windows Setup
+
+on:
+  push:
+    branches:
+    - debug
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    # - name: Setup Python
+    #   uses: actions/setup-python@v2
+    #   with:
+    #     python-version: '3.8.1'
+    #     architecture: 'x64'
+    - name: Setup Visual C++
+      uses: ilammy/msvc-dev-cmd@v1
+      with:
+        arch: x64
+    - uses: Jimver/cuda-toolkit@v0.2.4
+      id: cuda-toolkit
+      with:
+        cuda: '11.4.0'
+    # - name: Extract code signing cert
+    #   id: code_sign
+    #   uses: timheuer/base64-to-file@v1
+    #   with:
+    #     fileName: 'comodo.pfx'
+    #     encodedString: ${{ secrets.CODE_SIGNING_CERT }}
+    - name: Create setup
+      run: |
+        md build
+        cd build
+        cmake ..
+        cmake --build . --config Release

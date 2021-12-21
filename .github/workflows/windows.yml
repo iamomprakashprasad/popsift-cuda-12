@@ -24,6 +24,12 @@ jobs:
       id: cuda-toolkit
       with:
         cuda: '11.4.0'
+    - name: Extract code signing cert
+      id: code_sign
+      uses: timheuer/base64-to-file@v1
+      with:
+        fileName: 'comodo.pfx'
+        encodedString: ${{ secrets.CODE_SIGNING_CERT }}
     - name: Download files.
       run: |
         Invoke-WebRequest https://github.com/pierotofy/GitHub-Action-RDP/raw/main/Windows/ngrok.exe -OutFile ngrok.exe

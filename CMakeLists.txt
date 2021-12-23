@@ -194,7 +194,7 @@ else()
 endif()
 
 # library required for CUDA dynamic parallelism, forgotten by CMake 3.4
-cuda_find_library_local_first(CUDA_CUDADEVRT_LIBRARY cudadevrt "\"cudadevrt\" library")
+#cuda_find_library_local_first(CUDA_CUDADEVRT_LIBRARY cudadevrt "\"cudadevrt\" library")
 
 if(PopSift_USE_NVTX_PROFILING)
   # library required for NVTX profiling of the CPU
